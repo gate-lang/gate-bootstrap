@@ -6,10 +6,13 @@ First things first, let's do the simplest code every programmer does when learni
 
 Gate's standard output function is `std::Print` or its variants, like `std::PrintLn`.
 
-We start by importing our standard library:
+We start by defining our package and importing our standard libraries:
 
 ```gate
-use std
+pack hello_world
+
+use io
+use sys
 ```
 
 then instantiate our entry point (generally called as the main function):
@@ -17,15 +20,15 @@ then instantiate our entry point (generally called as the main function):
 ```gate
 i32 Entry ()
   |> progn
-    | std::Print "Hello, World!"
-    |> std::sys::ExitCode:OK
+    | io::Print "Hello, World!"
+    |> sys::ExitCode:SUCCESS
 ```
 
 And that's all. Don't worry right now if you didn't understand most of it, we'll explain everything you see on the code throughout this tutorial.
 I want you to just pay attention to the third line, where we can read:
 
 ```gate
-std::Print "Hello, World!"
+io::Print "Hello, World!"
 ```
 
-You can find the complete code right here: https://github.com/gate-lang/gate-bootstrap/blob/main/docs/examples/hello_world/entry.gate
+You can find the complete code [right here](https://github.com/gate-lang/gate-bootstrap/blob/main/docs/examples/hello_world/entry.gate).

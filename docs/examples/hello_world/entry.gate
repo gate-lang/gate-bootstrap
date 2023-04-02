@@ -10,11 +10,12 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-pack hello_world;
+pack hello_world
 
-use std
+use io
+use sys
 
 i32 Entry ()
   |> progn
-    | std::PrintLn "Hello, World!"
-  |> std::codes::EXIT_SUCCESS
+    | io::Print "Hello, World!"
+  |> sys::ExitCode:SUCCESS
