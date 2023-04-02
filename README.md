@@ -12,7 +12,7 @@
 A functional programming language that combines the concise syntax of C with explicit memory management. Its functional paradigm emphasizes functions as building blocks, offering improved code readability and the ability to use powerful concepts like recursion and higher-order functions. GATE is a versatile tool suitable for small scripts or large-scale applications.
 
 <div align="center">
-  <a href="https://github.com/gate-lang/gate-bootstrap/docs"><strong>Explore the docs and learn GATE »</strong></a>
+  <a href="https://github.com/gate-lang/gate-bootstrap/tree/main/docs"><strong>Explore the docs and learn GATE »</strong></a>
   <br/>
   <a href="https://github.com/gate-lang/gate-bootstrap/issues">Report Bug</a>
   ·
