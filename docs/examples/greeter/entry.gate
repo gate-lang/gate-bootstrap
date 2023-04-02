@@ -1,0 +1,25 @@
+pack greeter
+
+use std
+
+enum Formality(char^)
+  | INTIMATE -> "Hey there, "
+  | CASUAL   -> "Hi, What's Up, "
+  | FORMAL   -> "It's a pleasure, Sr./Ms. "
+
+struct Person
+  | char^ name
+
+struct Greeter
+  | Formality _
+
+char^ Greet (Greeter^ self, Person^ _)
+  |> std::Concat 'self:formality, person:name
+
+Person prsn = { "Josue Teodoro" }
+Greeter grtr = { greeter::Formality:INTIMATE }
+
+i32 Entry ()
+  |> progn
+    | grtr::Greet prsn
+    |> std::codes::EXIT_SUCCESS
