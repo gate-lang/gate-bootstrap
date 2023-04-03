@@ -1,3 +1,5 @@
+mod util;
+
 use clap::Parser;
 
 #[derive(Parser, Debug)]
@@ -19,5 +21,11 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
-    println!("{:#?}", args);
+    let foldername = args.run
+        .or(args.compile)
+        .expect("Either `run` or `compile` argument must be provided");
+
+    let app_io_info = util::fs::AppIO::new(foldername);
+
+    println!("{:#?}", app_io_info);
 }
