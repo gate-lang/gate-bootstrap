@@ -4,7 +4,7 @@ First things first, let's do the simplest code every programmer does when learni
 
 ## Printing stuff
 
-Gate's standard output function is `std::Print` or its variants, like `std::PrintLn`.
+Gate's standard output function is `io::Print` or its variants, like `io::PrintLn`.
 
 We start by defining our package and importing our standard libraries:
 
