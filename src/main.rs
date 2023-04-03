@@ -15,17 +15,23 @@ struct Args {
 
     // Desired filename binary output
     #[clap(short, long, requires="compile")]
-    output: Option<String>
+    output: Option<String>,
+
+    // Silence all output
+    #[clap(short, long)]
+    quiet: bool,
 }
 
 fn main() {
     let args = Args::parse();
 
+    env_logger::init();
+
     let foldername = args.run
         .or(args.compile)
         .expect("Either `run` or `compile` argument must be provided");
 
-    let app_io_info = util::fs::AppIO::new(foldername);
+    let app_io_info = util::fs::AppIO::new(foldername).expect("failed to parse app io info");
 
     println!("{:#?}", app_io_info);
 }
