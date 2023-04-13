@@ -38,4 +38,9 @@ struct g_args {
  */
 struct g_args *g_parse_args(int _argc, char **_argv);
 
+/*
+ * Checks and returns whether parsed _args are valid or not.
+ */
+bool g_is_args_valid(struct g_args *_args);
+
 #endif // __GATE_ARGS_H__

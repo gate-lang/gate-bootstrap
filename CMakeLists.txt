@@ -14,6 +14,7 @@ set(SOURCE
 
 if (CMAKE_DEBUG)
   add_compile_options(
+    "-DLOG_USE_COLOR"
     "-g"
   )
 endif ()

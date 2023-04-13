@@ -98,6 +98,8 @@ struct g_args *g_parse_args(int _argc, char **_argv) {
     return NULL;
   }
 
+  parsed_args->bin_folder = NULL;
+  parsed_args->proj_folder = NULL;
   parsed_args->type = 0;
   error_t err = argp_parse(&argp_settings, _argc, _argv, 0, 0, parsed_args);
   if (err != 0) {
@@ -107,5 +109,25 @@ struct g_args *g_parse_args(int _argc, char **_argv) {
     return NULL;
   }
 
+  if (!g_is_args_valid(parsed_args)) {
+    free(parsed_args);
+
+    return NULL;
+  }
+
   return parsed_args;
+}
+
+bool g_is_args_valid(struct g_args *_args) {
+  bool is_compiling = _args->type == G_ARGT_BUILD || _args->type == G_ARGT_RUN;
+
+  if (_args->type == G_ARGT_BUILD && _args->bin_folder == NULL) {
+    log_error("invalid arguments -- -b (BUILD) passed without value.");
+  } else if (is_compiling && _args->proj_folder == NULL) {
+    log_error("invalid arguments -- PROJFOLDER wasn't passed.");
+  } else {
+    return true;
+  }
+
+  return false;
 }
