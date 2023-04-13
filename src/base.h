@@ -1,7 +1,7 @@
 /*
- * file: src/main.c
+ * file: src/base.h
  * author: Josue Teodoro Moreira (J0sueTM) <teodoro.josue@pm.me>
- * date: 13 Apr, 2023
+ * date: 12 Apr, 2023
  *
  * Copyright (C) Josue Teodoro Moreira
  *
@@ -19,12 +19,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "util/args.h"
+#ifndef __GATE_BASE_H__
+#define __GATE_BASE_H__
 
-int main(int _argc, char **_argv) {
-  struct g_args *parsed_args = g_parse_args(_argc, _argv);
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-  free(parsed_args);
+#include "../vendor/log.c/src/log.h"
 
-  return 0;
-}
+#endif // __GATE_BASE_H__

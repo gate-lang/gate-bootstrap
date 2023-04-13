@@ -1,7 +1,7 @@
 /*
- * file: src/main.c
+ * file: src/util/args.h
  * author: Josue Teodoro Moreira (J0sueTM) <teodoro.josue@pm.me>
- * date: 13 Apr, 2023
+ * date: 12 Apr, 2023
  *
  * Copyright (C) Josue Teodoro Moreira
  *
@@ -19,12 +19,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "util/args.h"
+#ifndef __GATE_ARGS_H__
+#define __GATE_ARGS_H__
 
-int main(int _argc, char **_argv) {
-  struct g_args *parsed_args = g_parse_args(_argc, _argv);
+#include "../base.h"
+#include <argp.h>
 
-  free(parsed_args);
+enum g_arg_type { G_ARGT_HELP, G_ARGT_VERSION, G_ARGT_RUN, G_ARGT_BUILD };
 
-  return 0;
-}
+struct g_args {
+  enum g_arg_type type;
+  char *proj_folder;
+  char *bin_folder;
+};
+
+/*
+ * Parses given args, checks them and returns the parsed data.
+ */
+struct g_args *g_parse_args(int _argc, char **_argv);
+
+#endif // __GATE_ARGS_H__
