@@ -33,7 +33,7 @@ inline static bool has_opposing_arg_type(enum g_arg_type _cur,
                                          enum g_arg_type _other) {
   bool is_conflict = (_cur == _other);
   if (is_conflict) {
-    log_error("both -r (RUN) and -b (BUILD) flags were passed.");
+    log_error("UI -- both -r (RUN) and -b (BUILD) flags were passed.");
   }
 
   return is_conflict;
@@ -80,20 +80,21 @@ const static struct argp_option argp_options[] = {
     {"build", 'b', "BINFOLDER", 0, "Build project"},
     {0}};
 const static char argp_args_doc[] = "PROJFOLDER";
-const static char argp_doc[] = "gate -- Bootstrap compiler for the gate lang";
+const static char argp_doc[] = "GATE -- Bootstrap compiler for the gate lang";
 const static struct argp argp_settings = {argp_options, argp_parser,
                                           argp_args_doc, argp_doc};
 
 struct g_args *g_parse_args(int _argc, char **_argv) {
   if (_argc < 2) {
-    log_warn("not enough arguments. use `%s --help or --usage`.", _argv[0]);
+    log_warn("UI -- not enough arguments. use `%s --help or --usage`.",
+             _argv[0]);
 
     return NULL;
   }
 
   struct g_args *parsed_args = malloc(sizeof(struct g_args));
   if (!parsed_args) {
-    log_error("failed to allocate memory for g_args");
+    log_error("CORE -- failed to allocate memory for g_args");
 
     return NULL;
   }
@@ -103,7 +104,7 @@ struct g_args *g_parse_args(int _argc, char **_argv) {
   parsed_args->type = 0;
   error_t err = argp_parse(&argp_settings, _argc, _argv, 0, 0, parsed_args);
   if (err != 0) {
-    log_error("could not parse arguments -- %d", err);
+    log_error("CORE -- could not parse arguments: %d", err);
 
     free(parsed_args);
     return NULL;
@@ -119,12 +120,20 @@ struct g_args *g_parse_args(int _argc, char **_argv) {
 }
 
 bool g_is_args_valid(struct g_args *_args) {
+<<<<<<< HEAD
   bool is_compiling = _args->type == G_ARGT_BUILD || _args->type == G_ARGT_RUN;
 
   if (_args->type == G_ARGT_BUILD && _args->bin_folder == NULL) {
     log_error("invalid arguments -- -b (BUILD) passed without value.");
   } else if (is_compiling && _args->proj_folder == NULL) {
     log_error("invalid arguments -- PROJFOLDER wasn't passed.");
+=======
+  const bool is_compiling =
+      _args->type == G_ARGT_BUILD || _args->type == G_ARGT_RUN;
+
+  if (is_compiling && _args->proj_folder == NULL) {
+    log_error("UI -- invalid arguments: (PROJFOLDER) wasn't passed.");
+>>>>>>> 0182cdc (fix: added arg parsing & log blueprint)
   } else {
     return true;
   }
