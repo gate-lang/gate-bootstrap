@@ -120,20 +120,11 @@ struct g_args *g_parse_args(int _argc, char **_argv) {
 }
 
 bool g_is_args_valid(struct g_args *_args) {
-<<<<<<< HEAD
-  bool is_compiling = _args->type == G_ARGT_BUILD || _args->type == G_ARGT_RUN;
-
-  if (_args->type == G_ARGT_BUILD && _args->bin_folder == NULL) {
-    log_error("invalid arguments -- -b (BUILD) passed without value.");
-  } else if (is_compiling && _args->proj_folder == NULL) {
-    log_error("invalid arguments -- PROJFOLDER wasn't passed.");
-=======
   const bool is_compiling =
       _args->type == G_ARGT_BUILD || _args->type == G_ARGT_RUN;
 
   if (is_compiling && _args->proj_folder == NULL) {
     log_error("UI -- invalid arguments: (PROJFOLDER) wasn't passed.");
->>>>>>> 0182cdc (fix: added arg parsing & log blueprint)
   } else {
     return true;
   }
