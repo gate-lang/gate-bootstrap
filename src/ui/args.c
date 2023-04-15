@@ -1,5 +1,5 @@
 /*
- * file: src/util/args.c
+ * file: src/ui/args.c
  * author: Josue Teodoro Moreira (J0sueTM) <teodoro.josue@pm.me>
  * date: 12 Apr, 2023
  *

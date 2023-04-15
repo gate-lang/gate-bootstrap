@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "util/args.h"
+#include "ui/args.h"
 
 int main(int _argc, char **_argv) {
   struct g_args *parsed_args = g_parse_args(_argc, _argv);

@@ -7,8 +7,8 @@ set(SOURCE
   vendor/log.c/src/log.h
   vendor/log.c/src/log.c
 
-  src/util/args.h
-  src/util/args.c
+  src/ui/args.h
+  src/ui/args.c
   
   src/main.c)
 
