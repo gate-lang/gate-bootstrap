@@ -20,26 +20,39 @@
  */
 
 #include "../../src/common/linked_list.h"
+#include "../base.h"
 
-static int res = 0;
+int res, failed, cur_res = 0;
 
-static void g_test(int (*_func)()) {
-  int new_res = _func();
-  res = (res) ? res : new_res;
-}
-
-int g_test_alloc_dsll() { return 0; }
+int g_test_alloc_dsll();
 int g_test_insert_dsll_node() { return 0; }
 int g_test_insert_dsll_node_by_last() { return 0; }
 int g_test_free_dsll() { return 0; }
 int g_test_is_dsll_full() { return 0; }
 
 int main(void) {
-  g_test(g_test_alloc_dsll);
-  g_test(g_test_insert_dsll_node);
-  g_test(g_test_insert_dsll_node_by_last);
-  g_test(g_test_free_dsll);
-  g_test(g_test_is_dsll_full);
+  G_TEST(g_test_alloc_dsll);
+  G_TEST(g_test_insert_dsll_node);
+  G_TEST(g_test_insert_dsll_node_by_last);
+  G_TEST(g_test_free_dsll);
+  G_TEST(g_test_is_dsll_full);
 
   return res;
+}
+
+int g_test_alloc_dsll() {
+  struct g_dsll *empty_dsll = g_alloc_dsll(10, false);
+  G_NEXPECT(empty_dsll, NULL, "empty_dsll wasn't initialized", true);
+  G_EXPECT(empty_dsll->capacity, 10, "dsll capacity wasn't initialized", false);
+  G_EXPECT(empty_dsll->length, 0, "dsll length wasn't initialized", false);
+  if (empty_dsll)
+    g_free_dsll(empty_dsll, false);
+
+  // TODO(J0sueTM): Add tests for full dsll
+  // struct g_dsll *full_dsll = g_alloc_dsll(10, true);
+  // if (!empty_dsll) {
+  //   return 1;
+  // }
+
+  return cur_res;
 }
