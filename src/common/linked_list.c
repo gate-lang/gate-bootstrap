@@ -122,6 +122,7 @@ void g_free_dsll(struct g_dsll *_dsll, bool _should_free_data) {
     return;
   }
 
+  unsigned short node_count;
   struct g_dsll_node *current_node = _dsll->head.next, *next_node;
   while (current_node) {
     next_node = current_node->next;
@@ -132,6 +133,15 @@ void g_free_dsll(struct g_dsll *_dsll, bool _should_free_data) {
     free(current_node);
 
     current_node = next_node;
+    ++node_count;
+  }
+
+  if (node_count > _dsll->length) {
+    log_warn("CORE -- possible invalid usage of dsll node insertion. freed "
+             "more nodes than stated in dsll->length");
+  } else if (node_count < _dsll->length) {
+    log_warn("CORE -- possible memory leak of dsll nodes. freed more nodes "
+             "than stated in dsll->length");
   }
 
   free(_dsll);
