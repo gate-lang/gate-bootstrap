@@ -44,13 +44,24 @@ int g_test_alloc_dsll() {
   struct g_dsll *empty_dsll = g_alloc_dsll(10, false);
   G_NEXPECT(empty_dsll, NULL, "empty_dsll wasn't initialized", true);
   G_EXPECT(empty_dsll->capacity, 10, "dsll capacity wasn't initialized", false);
-  G_EXPECT(empty_dsll->length, 0, "dsll length wasn't initialized", false);
+  G_EXPECT(empty_dsll->length, 1, "dsll length wasn't initialized", false);
   if (empty_dsll)
     g_free_dsll(empty_dsll, false);
 
-  // TODO(J0sueTM): Add tests for full dsll
   struct g_dsll *full_dsll = g_alloc_dsll(10, true);
   G_NEXPECT(full_dsll, NULL, "full_dsll wasn't initialized", true);
+  G_EXPECT(full_dsll->length, full_dsll->capacity,
+           "full_dsll nodes weren't filled", true);
+
+  unsigned short node_count = 0;
+  for (struct g_dsll_node *current_node = full_dsll->head.next; current_node;
+       current_node = current_node->next) {
+    ++node_count;
+  }
+
+  G_EXPECT(node_count, full_dsll->length,
+           "full_dsll nodes weren't initialized correctly", false);
+
   if (full_dsll)
     free(full_dsll);
 
