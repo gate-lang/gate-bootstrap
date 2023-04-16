@@ -140,7 +140,7 @@ void g_free_dsll(struct g_dsll *_dsll, bool _should_free_data) {
     log_warn("CORE -- possible invalid usage of dsll node insertion. freed "
              "more nodes than stated in dsll->length");
   } else if (node_count < _dsll->length) {
-    log_warn("CORE -- possible memory leak of dsll nodes. freed more nodes "
+    log_warn("CORE -- possible memory leak of dsll nodes. freed less nodes "
              "than stated in dsll->length");
   }
 
