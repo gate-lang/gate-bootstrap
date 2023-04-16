@@ -49,10 +49,10 @@ int g_test_alloc_dsll() {
     g_free_dsll(empty_dsll, false);
 
   // TODO(J0sueTM): Add tests for full dsll
-  // struct g_dsll *full_dsll = g_alloc_dsll(10, true);
-  // if (!empty_dsll) {
-  //   return 1;
-  // }
+  struct g_dsll *full_dsll = g_alloc_dsll(10, true);
+  G_NEXPECT(full_dsll, NULL, "full_dsll wasn't initialized", true);
+  if (full_dsll)
+    free(full_dsll);
 
   return cur_res;
 }
