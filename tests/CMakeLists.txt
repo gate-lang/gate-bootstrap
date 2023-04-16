@@ -1,0 +1,6 @@
+add_executable(test_common_linked_list
+  ${CMAKE_CURRENT_SOURCE_DIR}/common/linked_list.test.c)
+target_link_libraries(test_common_linked_list PRIVATE gate_common)
+
+add_test(NAME test_common_linked_list
+  COMMAND $<TARGET_FILE:test_common_linked_list>)

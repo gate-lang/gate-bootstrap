@@ -1,7 +1,7 @@
 /*
- * file: src/main.c
+ * file: src/common/list_tree.h
  * author: Josue Teodoro Moreira (J0sueTM) <teodoro.josue@pm.me>
- * date: 13 Apr, 2023
+ * date: 15 Apr, 2023
  *
  * Copyright (C) Josue Teodoro Moreira
  *
@@ -19,15 +19,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ui/args.h"
+#ifndef __GATE_LIST_TREE_H__
+#define __GATE_LIST_TREE_H__
 
-int main(int _argc, char **_argv) {
-  struct g_args *parsed_args = g_parse_args(_argc, _argv);
-  if (parsed_args == NULL) {
-    return 1;
-  }
+#include "../base.h"
 
-  free(parsed_args);
+struct g_dslt_node {
+  void *data;
 
-  return 0;
-}
+  unsigned short capacity, length;
+  struct g_dslt_node *children;
+};
+
+struct g_dslt {
+  struct g_dslt_node head;
+  long node_count;
+};
+
+/*
+ * Creates an empty list tree and returns it.
+ */
+struct g_dslt *g_alloc_dslt(unsigned short _capacity);
+
+struct g_dslt_node *g_insert_dslt_node(struct g_dslt *_dslt,
+                                       struct g_dslt_node *_parent_node,
+                                       void *_data, unsigned short _capacity);
+
+#endif // __GATE_LIST_TREE_H__

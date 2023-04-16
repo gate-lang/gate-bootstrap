@@ -1,7 +1,7 @@
 /*
- * file: src/main.c
+ * file: tests/common/linked_list.test.c
  * author: Josue Teodoro Moreira (J0sueTM) <teodoro.josue@pm.me>
- * date: 13 Apr, 2023
+ * date: 15 Apr, 2023
  *
  * Copyright (C) Josue Teodoro Moreira
  *
@@ -19,15 +19,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "ui/args.h"
+#include "../../src/common/linked_list.h"
 
-int main(int _argc, char **_argv) {
-  struct g_args *parsed_args = g_parse_args(_argc, _argv);
-  if (parsed_args == NULL) {
-    return 1;
-  }
+static int res = 0;
 
-  free(parsed_args);
+static void g_test(int (*_func)()) {
+  int new_res = _func();
+  res = (res) ? res : new_res;
+}
 
-  return 0;
+int g_test_alloc_dsll() { return 0; }
+int g_test_insert_dsll_node() { return 0; }
+int g_test_insert_dsll_node_by_last() { return 0; }
+int g_test_free_dsll() { return 0; }
+int g_test_is_dsll_full() { return 0; }
+
+int main(void) {
+  g_test(g_test_alloc_dsll);
+  g_test(g_test_insert_dsll_node);
+  g_test(g_test_insert_dsll_node_by_last);
+  g_test(g_test_free_dsll);
+  g_test(g_test_is_dsll_full);
+
+  return res;
 }
