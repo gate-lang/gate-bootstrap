@@ -113,7 +113,7 @@ struct g_dslt_node *g_insert_dslt_node_by_parent(struct g_dslt *_dslt,
   struct g_dsll_node *inserted_dsll_node = g_insert_dsll_node(
       _parent->children, (void *)new_node, _parent->children->length);
   if (!inserted_dsll_node) {
-    free(new_node->children);
+    g_free_dsll(new_node->children, false);
     free(new_node);
 
     return NULL;
