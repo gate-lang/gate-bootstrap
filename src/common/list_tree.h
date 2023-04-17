@@ -23,26 +23,35 @@
 #define __GATE_LIST_TREE_H__
 
 #include "../base.h"
+#include "linked_list.h"
 
 struct g_dslt_node {
   void *data;
-
-  unsigned short capacity, length;
-  struct g_dslt_node *children;
+  struct g_dsll *children;
 };
 
 struct g_dslt {
   struct g_dslt_node head;
-  long node_count;
+  unsigned short node_count;
 };
 
 /*
  * Creates an empty list tree and returns it.
  */
-struct g_dslt *g_alloc_dslt(unsigned short _capacity);
+struct g_dslt *g_alloc_dslt();
 
-struct g_dslt_node *g_insert_dslt_node(struct g_dslt *_dslt,
-                                       struct g_dslt_node *_parent_node,
-                                       void *_data, unsigned short _capacity);
+/*
+ * Frees given _dslt.
+ * Recurses itself, by freeing the last child each recursion.
+ */
+void g_free_dslt(struct g_dslt *_dslt, bool _should_free_data);
+
+/*
+ * Inserts a new dslt node based on _parent.
+ */
+struct g_dslt_node *g_insert_dslt_node_by_parent(struct g_dslt *_dslt,
+                                                 struct g_dslt_node *_parent,
+                                                 void *_data,
+                                                 unsigned short _capacity);
 
 #endif // __GATE_LIST_TREE_H__
